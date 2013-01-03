@@ -11,7 +11,7 @@ var Html5Player = function(args) {
 
     Model = {
         mediaSource: function(arg) {
-            if(typeof arg !== 'string' || arg.trim() == '') {
+            if(typeof arg !== 'string' || arg.trim() === '') {
                 Controller.error('Unknown source');
             }
             return arg;
