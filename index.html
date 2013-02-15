@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+
+<title>test</title>
+<meta charset="utf-8">
+<style type="text/css">
+.bar {
+    position: relative;
+    border: 1px solid silver;
+    height: 10px;
+    width: 100px;
+}
+.run {
+    position: absolute;
+    height: 100%;
+    background-color: pink;
+}
+</style>
+<script src="js/lib/core.js"></script>
+</head>
+
+<body>
+    <div class="bar"><span class="run"></span></div>
+    <script>
+    var doc = document,
+        cl = doc.getElementsByClassName,
+        bar = doc.getElementsByClassName('bar')[0],
+        run = doc.getElementsByClassName('run')[0],
+
+        barLen = document.defaultView.getComputedStyle(bar) || bar.currentStyle,
+        barLen = parseInt(barLen['width']),
+
+        runLen = document.defaultView.getComputedStyle(run) || run.currentStyle,
+        runLen = parseInt(runLen['width']),
+        init = null,
+
+    Anim = function(e, callback) {
+        var i = 0, param = arguments[0];
+        this.func = function() {
+            if(i < (barLen)) {
+                i += 1;
+                run.style['width'] = runLen + i + 'px';
+            } else {
+                param()
+                init = clearInterval(init);
+            }
+        }
+    }
+    function func() {
+        console.log('Finish!!!');
+    }
+    var anim = new Anim(func);
+    init = setInterval(anim.func, 50)
+
+    console.log($j)
+    </script>
+
+</body>
+</html>
