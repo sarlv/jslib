@@ -22,10 +22,11 @@
 }
 </style>
 <script src="js/lib/core.js"></script>
+<script src="js/lib/dom.js"></script>
 </head>
 
 <body>
-    <div class="bar"><span class="run"></span></div>
+    <br><div class="bar" id="test"><span class="run"></span><strong></strong></div>
     <script>
     var doc = document,
         cl = doc.getElementsByClassName,
@@ -57,7 +58,8 @@
     var anim = new Anim(func);
     init = setInterval(anim.func, 50)
 
-    console.log($j)
+    $jdom.next($jdom.id('test')).style.border = '5px solid green';
+    
     </script>
 
 </body>
