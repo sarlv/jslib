@@ -20,6 +20,23 @@
 		return parent;
 	};
 
+	JW.console = function() {
+		if(!window.console) {
+			window.console = {};
+		}
+		var opt = [
+			"log", "info", "warn", "error", "debug", "trace", "dir", "group",
+	    	"groupCollapsed", "groupEnd", "time", "timeEnd", "profile", "profileEnd",
+	    	"dirxml", "assert", "count", "markTimeline", "timeStamp", "clear"
+		], i = 0, len = opt.length;
+
+		for(; i < len; i += 1) {
+			if(!window.console[opt[i]]) {
+				window.console[opt[i]] = function() {};
+			}
+		}
+	}();
+
 	window.$j = JW;
 
 }());
