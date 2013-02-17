@@ -1,5 +1,6 @@
 (function() {
 	// Универсальня функция создания пространства имен
+	// позаимствованная у Стояна Стефанова
 	var JW = JW || {};
 	JW.namespace = function(ns_string) {
 		var parts = ns_string.split('.'),

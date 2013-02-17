@@ -5,17 +5,33 @@
 		id: function(arg) {
 			return document.getElementById(arg);
 		},
-		prev: function(elem) {
-			do {
-				elem = elem.previousSibling;
-			} while(elem && elem.nodeType !== 1);
+		getClass: function(arg) {
+			var name = arg.trim(),
+			 	elem;
+			if(document.querySelector) {
+				if(name.charAt(0) !== '.') {
+					elem = document.querySelector('.' + name);
+				} else {
+					elem = document.querySelector(name);
+				}
+			} else {
+				// TO DO
+			}
 			return elem;
 		},
-		next: function(elem) {
+		prev: function(elem) {
+			var el = elem;
 			do {
-				elem = elem.nextSibling;
-			} while(elem && elem.nodeType !== 1);
-			return elem;
+				el = el.previousSibling;
+			} while(el && el.nodeType !== 1);
+			return el;
+		},
+		next: function(elem) {
+			var el = elem;
+			do {
+				el = el.nextSibling;
+			} while(el && el.nodeType !== 1);
+			return el;
 		},
 		child: function(elem) {
 			elem = elem.childNodes,
@@ -35,6 +51,9 @@
 			if(typeof arg === 'string') {
 				if(arg.charAt(0) === '#') {
 					elem = this.id(arg.slice(1));
+				}
+				if(arg.charAt(0) === '.') {
+					elem = this.getClass(arg);
 				}
 			} else {
 				return false;
