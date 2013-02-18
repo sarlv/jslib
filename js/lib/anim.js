@@ -1,6 +1,6 @@
 (function() {
-	var anim = $j.namespace('anim');
+	//var anim = $j.namespace('anim');
 
-	$janim = $j.anim = {}
+	//$janim = $j.anim = {}
 
 }());
