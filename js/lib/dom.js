@@ -1,18 +1,21 @@
 (function() {
-	var dom = $j.namespace('dom')
-
-	$jdom = $j.dom = {
+	
+	'use strict';
+	
+	var $jw = window.JW;
+	
+	$jw.prototype.dom = {
 		id: function(arg) {
 			return document.getElementById(arg);
 		},
 		getClass: function(arg) {
 			var name = arg.trim(),
-			 	elem;
-			if(document.querySelector) {
+			 	elem = null;
+			if(document.querySelectorAll) {
 				if(name.charAt(0) !== '.') {
-					elem = document.querySelector('.' + name);
+					elem = document.querySelectorAll('.' + name);
 				} else {
-					elem = document.querySelector(name);
+					elem = document.querySelectorAll(name);
 				}
 			} else {
 				// TO DO
@@ -20,24 +23,30 @@
 			return elem;
 		},
 		prev: function(elem) {
-			var el = elem;
+			var el = this.detect(elem);
 			do {
 				el = el.previousSibling;
 			} while(el && el.nodeType !== 1);
 			return el;
 		},
 		next: function(elem) {
-			var el = elem;
+			var el = this.detect(elem);
+			console.log(el)
+			if($jw.is('Array', el)) {
+				console.log(el)
+				
+			}
 			do {
 				el = el.nextSibling;
 			} while(el && el.nodeType !== 1);
 			return el;
 		},
 		child: function(elem) {
-			elem = elem.childNodes,
-			len = elem.length,
-			i = 0,
-			result = [];
+			
+			var elem = this.detect(elem).childNodes,
+				len = elem.length,
+				i = 0,
+				result = [];
 			for(; i < len; i += 1) {
 				if(elem[i].nodeType === 1) {
 					result.push(elem[i])
@@ -46,19 +55,9 @@
 			return result;
 		},
 		css: function(arg, st, prop) {
-			var elem = null;
-
-			if(typeof arg === 'string') {
-				if(arg.charAt(0) === '#') {
-					elem = this.id(arg.slice(1));
-				}
-				if(arg.charAt(0) === '.') {
-					elem = this.getClass(arg);
-				}
-			} else {
-				return false;
-			}
-
+			
+			var elem = this.detect(arg);
+			
 			if(elem !== null) {
 				if(arguments.length === 2 && typeof st === 'string') {
 					var params = st.split(':');
@@ -75,6 +74,21 @@
 				if(arguments.length === 3) {
 					elem.style[st] = prop;
 				}
+			}
+		},
+		detect: function (arg) {
+			var elem = null;
+
+			if(typeof arg === 'string') {
+				if(arg.charAt(0) === '#') {
+					elem = this.id(arg.slice(1));
+				}
+				if(arg.charAt(0) === '.') {
+					elem = this.getClass(arg);
+				}
+				return elem;
+			} else {
+				return false;
 			}
 		}
 	}
