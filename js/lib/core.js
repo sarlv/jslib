@@ -9,7 +9,7 @@
 		return obj !== undefined && obj !== null && clas === type;
 	}
 	
-	return var $j = new JW();
+	return var $jw = new JW();
 	
 }());
 
