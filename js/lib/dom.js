@@ -2,8 +2,6 @@
 	
 	'use strict';
 	
-	var $jw = window.JW;
-	
 	$jw.prototype.dom = {
 		id: function(arg) {
 			return document.getElementById(arg);
